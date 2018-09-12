@@ -5,18 +5,24 @@
 
 function processEvents() {
   var ss=SpreadsheetApp.getActiveSpreadsheet();
-  var cal=CalendarApp.getCalendarsByName("Capital District Webmaster")[0]; //Replace "Capital District Webmaster" with the name of your calendar
-  var sheet=SpreadsheetApp.setActiveSheet(ss.getSheets()[0]); //need a routine to set active sheet by name?
-  //go defensive
-  var col_broadcast,col_itunes, col_youtube=1; //Leftover code from what I copied that I'm too afraid to get rid of, delete at your own risk
+  //Replace "Capital District Webmaster" with the name of your calendar
+  var cal=CalendarApp.getCalendarsByName("Capital District Webmaster")[0];
+  //Uses the sheet at the index of getSheets() I think?
+  var sheet=SpreadsheetApp.setActiveSheet(ss.getSheets()[0]);
+  //Leftover code from what I copied that I'm too afraid to get rid of, delete at your own risk
+  var col_broadcast,col_itunes, col_youtube=1;
   var maxcols=sheet.getMaxColumns();
 
-  var startRow = 2;  // First row of data to process
-  var numRows = 100;   // Number of rows to process | If the calendar stops working, try increasing this number or deleting earlier entries
+  //First row of data to process
+  var startRow = 2;
+  //Number of rows to process | If the calendar stops working, try increasing this number or deleting earlier entries
+  var numRows = 100;
+  //startRow is the y coord of your top left cell, 1 is the x coord, numRows is the # of rows your range covers, 26 is # of columns
   var dataRange = sheet.getRange(startRow, 1, numRows, 26);
   var data = dataRange.getValues();
   
-  for (i in data) { //Identifies each column by row (furthest left row is row zero)
+  //Identifies each column by row (furthest left row is row zero)
+  for (i in data) {
     var row = data[i];
     var title = row[1];
     var desc=row[5];
